@@ -146,6 +146,18 @@
         border-radius: 0.5em;
         
     }
+    .left a {
+        font-size: clamp(1em, 2vw, 1.25em);
+        background-color: var(--ctp-mocha-surface0);
+        color: black;
+        text-decoration: none;
+        text-align: center;
+        border: none;
+        padding: 0.5em;
+        width: 10em;
+        border-radius: 0.5em;
+
+    }
 
     @media screen and (max-width: 866px) {
         body {
@@ -186,7 +198,7 @@
                 <option value="lavender">Lavender</option>
             </select>
         </div>
-        <button onclick="draw()" id="drawButton">Draw!</button>
+        <button onclick="draw()" id="drawButton">Draw and download!</button>
     </div>
     <div class="right">
         <canvas data-wallpaper></canvas>
@@ -379,6 +391,13 @@
         background(accent)
         ground(accent)
         cat(accent)
+        let canvasUrl = canvas.toDataURL();
+        const download = document.createElement('a');
+        download.href = canvasUrl
+        download.download = `catppuccin-${flavour}-${colour}`;
+
+        download.click();
+        download.remove();
     }
 
 </script>

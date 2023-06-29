@@ -1,0 +1,1 @@
+There is only one wallpaper so far, but you can choose the colours and theme (colours from [catppuccin](https://github.com/catppuccin)). 
