@@ -1,0 +1,394 @@
+<head>
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://unpkg.com/@catppuccin/palette/css/catppuccin.css');
+
+    
+    option[value="latte"] {
+        background: var(--ctp-latte-base);
+        color: var(--ctp-latte-text);
+    }
+
+    option[value="frappe"] {
+        background: var(--ctp-frappe-base);
+        color: var(--ctp-frappe-text);
+    }
+    
+    option[value="macchiato"] {
+        background: var(--ctp-macchiato-base);
+        color: var(--ctp-macchiato-text);
+    }
+    
+    option[value="mocha"] {
+        background: var(--ctp-mocha-base);
+        color: var(--ctp-mocha-text);
+    }
+    
+    option[value="rosewater"] {
+        background: var(--ctp-latte-rosewater);
+        color: black;
+    }
+    
+    option[value="flamingo"] {
+        background: var(--ctp-latte-flamingo);
+        color: black;
+    }
+
+    option[value="pink"] {
+        background: var(--ctp-latte-pink);
+        color: black;
+    }
+    
+    option[value="mauve"] {
+        background: var(--ctp-latte-mauve);
+        color: black;
+    }
+    
+    option[value="red"] {
+        background: var(--ctp-latte-red);
+        color: black;
+    }
+    
+    option[value="maroon"] {
+        background: var(--ctp-latte-maroon);
+        color: black;
+    }
+    
+    option[value="peach"] {
+        background: var(--ctp-latte-peach);
+        color: black;
+    }
+    
+    option[value="yellow"] {
+        background: var(--ctp-latte-yellow);
+        color: black;
+    }
+    
+    option[value="green"] {
+        background: var(--ctp-latte-green);
+        color: black;
+    }
+    
+    option[value="teal"] {
+        background: var(--ctp-latte-teal);
+        color: black;
+    }
+    
+    option[value="sky"] {
+        background: var(--ctp-latte-sky);
+        color: black;
+    }
+    
+    option[value="sapphire"] {
+        background: var(--ctp-latte-sapphire);
+        color: black;
+    }
+    
+    option[value="blue"] {
+        background: var(--ctp-latte-blue);
+        color: black;
+    }
+    
+    option[value="lavender"] {
+        background: var(--ctp-latte-lavender);
+        color: black;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        padding: 0;
+        margin: 0;
+    }
+    
+    canvas {
+        height: 100%;
+    }
+    body {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+    }
+    
+    .right {
+        height: 100%;
+        
+    }
+
+    .left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
+        font-size: clamp(1em, 2vw, 1.25em);
+        min-height: 10em;
+    }
+    .settings select {
+        font-size: 20px;
+        font-size: clamp(1em, 2vw, 1.25em);
+        border: none;
+        padding: 0.5em;
+        width: 10em;
+        height: 3em;
+        border-radius: 0.5em;
+    }
+    .left button {
+        font-size: clamp(1em, 2vw, 1.25em);
+        background-color: var(--ctp-mocha-surface0);
+        color: black;
+        border: none;
+        padding: 0.5em;
+        width: 20em;
+        height: 3em;
+        border-radius: 0.5em;
+        
+    }
+
+    @media screen and (max-width: 866px) {
+        body {
+            flex-direction: column;
+        }
+        .right {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+            height: 80vh;
+        }
+    }
+</style>
+
+<body>
+    <div class="left">
+        <div class="settings">
+            <select name="flavour" id="flavourSelect">
+                <option value="latte">Latte</option>
+                <option value="frappe">Frappe</option>
+                <option value="macchiato">Macchiato</option>
+                <option value="mocha">Mocha</option>
+            </select>
+            <select name="colour" id="colourSelect">
+                <option value="rosewater">Rosewater</option>
+                <option value="flamingo">Flamingo</option>
+                <option value="pink">Pink</option>
+                <option value="mauve">Mauve</option>
+                <option value="red">Red</option>
+                <option value="maroon">Maroon</option>
+                <option value="peach">Peach</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="teal">Teal</option>
+                <option value="sky">Sky</option>
+                <option value="sapphire">Sapphire</option>
+                <option value="blue">Blue</option>
+                <option value="lavender">Lavender</option>
+            </select>
+        </div>
+        <button onclick="draw()" id="drawButton">Draw!</button>
+    </div>
+    <div class="right">
+        <canvas data-wallpaper></canvas>
+    </div>
+</body>
+<script>
+    const colours = {
+        "latte-rosewater": "hsl(11, 59%, 67%)",
+        "frappe-rosewater": "hsl(10, 57%, 88%)",
+        "macchiato-rosewater": "hsl(10, 58%, 90%)",
+        "mocha-rosewater": "hsl(10, 56%, 91%)",
+        "latte-flamingo": "hsl(0, 60%, 67%)",
+        "frappe-flamingo": "hsl(0, 59%, 84%)",
+        "macchiato-flamingo": "hsl(0, 58%, 86%)",
+        "mocha-flamingo": "hsl(0, 59%, 88%)",
+        "latte-pink": "hsl(316, 73%, 69%)",
+        "frappe-pink": "hsl(316, 73%, 84%)",
+        "macchiato-pink": "hsl(316, 74%, 85%)",
+        "mocha-pink": "hsl(316, 72%, 86%)",
+        "latte-mauve": "hsl(266, 85%, 58%)",
+        "frappe-mauve": "hsl(277, 59%, 76%)",
+        "macchiato-mauve": "hsl(267, 83%, 80%)",
+        "mocha-mauve": "hsl(267, 84%, 81%)",
+        "latte-red": "hsl(347, 87%, 44%)",
+        "frappe-red": "hsl(359, 68%, 71%)",
+        "macchiato-red": "hsl(351, 74%, 73%)",
+        "mocha-red": "hsl(343, 81%, 75%)",
+        "latte-maroon": "hsl(355, 76%, 59%)",
+        "frappe-maroon": "hsl(358, 66%, 76%)",
+        "macchiato-maroon": "hsl(355, 71%, 77%)",
+        "mocha-maroon": "hsl(350, 65%, 77%)",
+        "latte-peach": "hsl(22, 99%, 52%)",
+        "frappe-peach": "hsl(20, 79%, 70%)",
+        "macchiato-peach": "hsl(21, 86%, 73%)",
+        "mocha-peach": "hsl(23, 92%, 75%)",
+        "latte-yellow": "hsl(35, 77%, 49%)",
+        "frappe-yellow": "hsl(40, 62%, 73%)",
+        "macchiato-yellow": "hsl(40, 70%, 78%)",
+        "mocha-yellow": "hsl(41, 86%, 83%)",
+        "latte-green": "hsl(109, 58%, 40%)",
+        "frappe-green": "hsl(96, 44%, 68%)",
+        "macchiato-green": "hsl(105, 48%, 72%)",
+        "mocha-green": "hsl(115, 54%, 76%)",
+        "latte-teal": "hsl(183, 74%, 35%)",
+        "frappe-teal": "hsl(172, 39%, 65%)",
+        "macchiato-teal": "hsl(171, 47%, 69%)",
+        "mocha-teal": "hsl(170, 57%, 73%)",
+        "latte-sky": "hsl(197, 97%, 46%)",
+        "frappe-sky": "hsl(189, 48%, 73%)",
+        "macchiato-sky": "hsl(189, 59%, 73%)",
+        "mocha-sky": "hsl(189, 71%, 73%)",
+        "latte-sapphire": "hsl(189, 70%, 42%)",
+        "frappe-sapphire": "hsl(199, 55%, 69%)",
+        "macchiato-sapphire": "hsl(199, 66%, 69%)",
+        "mocha-sapphire": "hsl(199, 76%, 69%)",
+        "latte-blue": "hsl(220, 91%, 54%)",
+        "frappe-blue": "hsl(222, 74%, 74%)",
+        "macchiato-blue": "hsl(220, 83%, 75%)",
+        "mocha-blue": "hsl(217, 92%, 76%)",
+        "latte-lavender": "hsl(231, 97%, 72%)",
+        "frappe-lavender": "hsl(239, 66%, 84%)",
+        "macchiato-lavender": "hsl(234, 82%, 85%)",
+        "mocha-lavender": "hsl(232, 97%, 85%)",
+        "latte-text": "hsl(234, 16%, 35%)",
+        "frappe-text": "hsl(227, 70%, 87%)",
+        "macchiato-text": "hsl(227, 68%, 88%)",
+        "mocha-text": "hsl(226, 64%, 88%)",
+        "latte-subtext1": "hsl(233, 13%, 41%)",
+        "frappe-subtext1": "hsl(227, 44%, 80%)",
+        "macchiato-subtext1": "hsl(228, 39%, 80%)",
+        "mocha-subtext1": "hsl(227, 35%, 80%)",
+        "latte-subtext0": "hsl(233, 10%, 47%)",
+        "frappe-subtext0": "hsl(228, 29%, 73%)",
+        "macchiato-subtext0": "hsl(227, 27%, 72%)",
+        "mocha-subtext0": "hsl(228, 24%, 72%)",
+        "latte-overlay2": "hsl(232, 10%, 53%)",
+        "frappe-overlay2": "hsl(228, 22%, 66%)",
+        "macchiato-overlay2": "hsl(228, 20%, 65%)",
+        "mocha-overlay2": "hsl(228, 17%, 64%)",
+        "latte-overlay1": "hsl(231, 10%, 59%)",
+        "frappe-overlay1": "hsl(227, 17%, 58%)",
+        "macchiato-overlay1": "hsl(228, 15%, 57%)",
+        "mocha-overlay1": "hsl(230, 13%, 55%)",
+        "latte-overlay0": "hsl(228, 11%, 65%)",
+        "frappe-overlay0": "hsl(229, 13%, 52%)",
+        "macchiato-overlay0": "hsl(230, 12%, 49%)",
+        "mocha-overlay0": "hsl(231, 11%, 47%)",
+        "latte-surface2": "hsl(227, 12%, 71%)",
+        "frappe-surface2": "hsl(228, 13%, 44%)",
+        "macchiato-surface2": "hsl(230, 14%, 41%)",
+        "mocha-surface2": "hsl(233, 12%, 39%)",
+        "latte-surface1": "hsl(225, 14%, 77%)",
+        "frappe-surface1": "hsl(227, 15%, 37%)",
+        "macchiato-surface1": "hsl(231, 16%, 34%)",
+        "mocha-surface1": "hsl(234, 13%, 31%)",
+        "latte-surface0": "hsl(223, 16%, 83%)",
+        "frappe-surface0": "hsl(230, 16%, 30%)",
+        "macchiato-surface0": "hsl(230, 19%, 26%)",
+        "mocha-surface0": "hsl(237, 16%, 23%)",
+        "latte-base": "hsl(220, 23%, 95%)",
+        "frappe-base": "hsl(229, 19%, 23%)",
+        "macchiato-base": "hsl(232, 23%, 18%)",
+        "mocha-base": "hsl(240, 21%, 15%)",
+        "latte-mantle": "hsl(220, 22%, 92%)",
+        "frappe-mantle": "hsl(231, 19%, 20%)",
+        "macchiato-mantle": "hsl(233, 23%, 15%)",
+        "mocha-mantle": "hsl(240, 21%, 12%)",
+        "latte-crust": "hsl(220, 21%, 89%)",
+        "frappe-crust": "hsl(229, 20%, 17%)",
+        "macchiato-crust": "hsl(236, 23%, 12%)",
+        "mocha-crust": "hsl(240, 23%, 9%)"
+    }
+    const canvas = document.querySelector("[data-wallpaper]")
+    canvas.width = 1080;
+    canvas.height = 2400;
+    const ctx = canvas.getContext("2d");
+    function flavourOnChange() {
+        flavour = flavourSelect.value
+        document.body.style.backgroundColor = colours[`${flavour}-base`]
+        flavourSelect.style.backgroundColor = colours[`${flavour}-surface0`]
+        flavourSelect.style.color = colours[`${flavour}-text`]
+        colourSelect.style.backgroundColor = colours[`${flavour}-surface0`]
+        colourSelect.style.color = colours[`${flavour}-text`]
+        drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
+        drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
+        canvas.style.backgroundColor = colours[`${flavour}-mantle`]
+    }
+    function colourOnChange() {
+        colour = colourSelect.value
+        drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
+        drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
+    }
+    flavour = flavourSelect.value
+    colour = colourSelect.value
+    flavourSelect.onchange = flavourOnChange
+    colourSelect.onchange = colourOnChange
+    flavourOnChange()
+    colourOnChange()
+
+    const ground = (accent) => {
+        ctx.fillStyle = accent;
+        ctx.fillRect(0, 1735, 1080, 665);
+        ctx.fillStyle = `hsl(0, 0%, 0%, ${(34 / 255) * 100}%)`;
+        ctx.beginPath()
+        ctx.moveTo(618, 1737)
+        ctx.lineTo(1074, 2279)
+        ctx.lineTo(1074, 1855)
+        ctx.lineTo(959, 1736)
+        ctx.lineTo(618, 1737)
+        ctx.closePath()
+        ctx.fill()
+    }
+    const background = (accent) => {
+        shades = [
+            colours[`${flavour}-crust`], colours[`${flavour}-mantle`], colours[`${flavour}-base`], colours[`${flavour}-surface0`], colours[`${flavour}-surface1`], colours[`${flavour}-surface2`]
+        ]
+        for (let i = 0; i < shades.length; i++) {
+            ctx.fillStyle = shades[i]
+            if (i == 0) {
+                ctx.fillRect(0, 0, 1080, 2400)
+            } else {
+                j = -i + 1
+                ctx.beginPath()
+                ctx.moveTo(0, j * 270 + 620 - 80 + shades.length * 135)
+                ctx.lineTo(1079, j * 270 + 270 - 80 + shades.length * 135)
+                ctx.lineTo(1079, j * 270 - 80 + shades.length * 135)
+                ctx.lineTo(0, j * 270 + 350 - 80 + shades.length * 135)
+                ctx.lineTo(0, j * 270 + 620 - 80 + shades.length * 135)
+                ctx.closePath()
+                ctx.fill()
+            }
+        }
+    }
+    const cat = (accent) => {
+        const ascii = ["  ／l、",
+            "（ﾟ､ ｡ ７",
+            "  l  ~ヽ",
+            "  じしf_,)ノ"]
+        for (i = 0; i < ascii.length; i++) {
+            console.log(ascii[i])
+            ctx.fillStyle = colours[`${flavour}-text`]
+            size = 86
+            ctx.font = `bold ${size}px CaskaydiaCove Nerd Font`
+            ctx.fillText(ascii[i], 500, (i + 1) * size + 1380)
+        }
+    }
+
+    const draw = () => {
+        let accent = colours[`${flavour}-${colour}`];
+        background(accent)
+        ground(accent)
+        cat(accent)
+    }
+
+</script>
+
+</html>
+
+<!-- 
+
+  ／l、             
+（ﾟ､ ｡ ７         
+  l  ~ヽ       
+  じしf_,)ノ
+ -->
