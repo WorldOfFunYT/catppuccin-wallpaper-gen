@@ -320,14 +320,7 @@
     canvas.width = 1080;
     canvas.height = 2400;
     const ctx = canvas.getContext("2d");
-    const font = new FontFace('font', 'url(fonts/FiraCode-Regular.ttf)');
-    font.load().then(function (font) {
-
-    // with canvas, if this is ommited won't work
-    document.fonts.add(font);
-
-    console.log('Loaded font');
-    });
+    
 
     drawButton.addEventListener("click", () => {draw()})
     downloadButton.addEventListener("click", () => {download()})
@@ -390,16 +383,21 @@
         }
     }
     const cat = (accent) => {
-        const ascii = ["  ／l、",
-            "（ﾟ､ ｡ ７",
-            "  l  ~ヽ",
-            "  じしf_,)ノ"]
-        for (i = 0; i < ascii.length; i++) {
-            console.log(ascii[i])
-            ctx.fillStyle = colours[`${flavour}-text`]
-            size = 86
-            ctx.font = `${size}px font`
-            ctx.fillText(ascii[i], 500, (i + 1) * size + 1380)
+        var img = new Image();
+        img.src = "./cat.svg"
+        // const ascii = ["  ／l、",
+        //     "（ﾟ､ ｡ ７",
+        //     "  l  ~ヽ",
+        //     "  じしf_,)ノ"]
+        // for (i = 0; i < ascii.length; i++) {
+        //     console.log(ascii[i])
+        //     ctx.fillStyle = colours[`${flavour}-text`]
+        //     size = 86
+        //     ctx.font = `${size}px font`
+        //     ctx.fillText(ascii[i], 500, (i + 1) * size + 1380)
+        // }
+        img.onload = function() {
+            ctx.drawImage(img, 560, 1340, 450, 450)
         }
     }
 
