@@ -1,5 +1,8 @@
 <head>
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&display=swap" rel="stylesheet">
 </head>
 <style>
     @import url('https://unpkg.com/@catppuccin/palette/css/catppuccin.css');
@@ -207,14 +210,6 @@
 </body>
 <script>
     
-    let myFont = new FontFace(
-    "Fira Code",
-    " url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@700&display=swap')"
-    );
-    myFont.load().then((font) => {
-    document.fonts.add(font);
-    console.log("Font loaded");
-    });
     const colours = {
         "latte-rosewater": "hsl(11, 59%, 67%)",
         "frappe-rosewater": "hsl(10, 57%, 88%)",
@@ -395,7 +390,7 @@
             console.log(ascii[i])
             ctx.fillStyle = colours[`${flavour}-text`]
             size = 86
-            ctx.font = `bold ${size}px Fira Code`
+            ctx.font = `bold ${size}px 'Fira Code'`
             ctx.fillText(ascii[i], 500, (i + 1) * size + 1380)
         }
     }
