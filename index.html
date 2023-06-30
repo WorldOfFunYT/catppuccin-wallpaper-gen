@@ -198,8 +198,8 @@
                 <option value="lavender">Lavender</option>
             </select>
         </div>
-        <button onclick="draw()" id="drawButton">Draw!</button>
-        <button onclick="download()" id="drawButton">Download!</button>
+        <button id="drawButton">Draw!</button>
+        <button id="downloadButton">Download!</button>
     </div>
     <div class="right">
         <canvas data-wallpaper></canvas>
@@ -316,6 +316,10 @@
     canvas.width = 1080;
     canvas.height = 2400;
     const ctx = canvas.getContext("2d");
+
+    drawButton.addEventListener("click", () => {draw()})
+    downloadButton.addEventListener("click", () => {download()})
+
     function flavourOnChange() {
         flavour = flavourSelect.value
         document.body.style.backgroundColor = colours[`${flavour}-base`]
@@ -324,12 +328,12 @@
         colourSelect.style.backgroundColor = colours[`${flavour}-surface0`]
         colourSelect.style.color = colours[`${flavour}-text`]
         drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
-        drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
+        downloadButton.style.backgroundColor = colours[`${flavour}-surface1`]
+        downloadButton.style.color = colours[`${flavour}-text`]
         canvas.style.backgroundColor = colours[`${flavour}-mantle`]
     }
     function colourOnChange() {
         colour = colourSelect.value
-        drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
         drawButton.style.backgroundColor = colours[`${flavour}-${colour}`]
     }
     flavour = flavourSelect.value
