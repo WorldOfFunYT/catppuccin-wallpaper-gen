@@ -320,6 +320,14 @@
     canvas.width = 1080;
     canvas.height = 2400;
     const ctx = canvas.getContext("2d");
+    const font = new FontFace('font', 'url(fonts/FiraCode-Regular.ttf)');
+    font.load().then(function (font) {
+
+    // with canvas, if this is ommited won't work
+    document.fonts.add(font);
+
+    console.log('Loaded font');
+    });
 
     drawButton.addEventListener("click", () => {draw()})
     downloadButton.addEventListener("click", () => {download()})
@@ -390,7 +398,7 @@
             console.log(ascii[i])
             ctx.fillStyle = colours[`${flavour}-text`]
             size = 86
-            ctx.font = `${size}px 'Courier New'`
+            ctx.font = `${size}px font`
             ctx.fillText(ascii[i], 500, (i + 1) * size + 1380)
         }
     }
