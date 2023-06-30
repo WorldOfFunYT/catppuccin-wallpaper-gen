@@ -198,7 +198,8 @@
                 <option value="lavender">Lavender</option>
             </select>
         </div>
-        <button onclick="draw()" id="drawButton">Draw and download!</button>
+        <button onclick="draw()" id="drawButton">Draw!</button>
+        <button onclick="download()" id="drawButton">Download!</button>
     </div>
     <div class="right">
         <canvas data-wallpaper></canvas>
@@ -381,23 +382,28 @@
             console.log(ascii[i])
             ctx.fillStyle = colours[`${flavour}-text`]
             size = 86
-            ctx.font = `bold ${size}px CaskaydiaCove Nerd Font`
+            ctx.font = `bold ${size}px Courier New`
             ctx.fillText(ascii[i], 500, (i + 1) * size + 1380)
         }
     }
 
+    
     const draw = () => {
         let accent = colours[`${flavour}-${colour}`];
         background(accent)
         ground(accent)
         cat(accent)
+    }
+    const download = () => {
+        draw()
         let canvasUrl = canvas.toDataURL();
-        const download = document.createElement('a');
-        download.href = canvasUrl
-        download.download = `catppuccin-${flavour}-${colour}`;
+        const elem = document.createElement('a');
+        elem.href = canvasUrl
+        elem.download = `catppuccin-${flavour}-${colour}`;
+    
+        elem.click();
+        elem.remove();
 
-        download.click();
-        download.remove();
     }
 
 </script>
